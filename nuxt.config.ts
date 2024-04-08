@@ -14,7 +14,7 @@ export default defineNuxtConfig({
     families: {
       Lora: true,
     },
-    overwriting: true,
+    // overwriting: true,
   },
   nitro: {
     plugins: ["~/server/index.ts"],
