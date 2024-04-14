@@ -22,7 +22,7 @@
         class="h-4/5"
         :ui="{ padding: 'p-2', size: 'text-md' }"
       />
-      <UButton label="Sign Out" color="cyan" block to="/auth" />
+      <UButton label="Sign Out" color="cyan" block @click="logoutFromPortal" />
     </section>
     <section class="w-5/6">
       <q-toolbar>
@@ -75,6 +75,13 @@ const navigationSections = [
     },
   ],
 ];
+
+const { data, signOut } = useAuth();
+
+async function logoutFromPortal() {
+  await signOut();
+  navigateTo("/auth");
+}
 
 // onMounted(()=> {
 

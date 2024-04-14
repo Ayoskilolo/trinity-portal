@@ -1,0 +1,128 @@
+// This is your Prisma schema file
+// learn more about it in the docs https//pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate https//pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+enum Level {
+  FRESHMAN
+  SOPHMORE
+  JUNIOR
+  SENIOR
+}
+
+enum College {
+  COE
+  CST
+  CMSS
+  CDSS
+}
+
+enum Diagnosis {
+  COLD
+  MALARIA
+  SPRAIN
+  NULL
+}
+
+enum Severity {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+enum Status {
+  ON_SEAT
+  OFF_SEAT
+}
+
+model Doctor {
+  id          String      @id @default(uuid())
+  dateCreated DateTime    @default(now())
+  dateUpdated DateTime    @updatedAt
+  firstName   String      @db.VarChar(255)
+  lastName    String      @db.VarChar(255)
+  status      Status
+  email       String
+  Visits      Visits[]
+  Surgeries   Surgeries[]
+}
+
+model Student {
+  matricNumber String      @id
+  firstName    String
+  lastName     String
+  nationality  String
+  dateOfBirth  DateTime
+  level        Level
+  college      College
+  sex          Sex
+  religion     String
+  password     String
+  dateCreated  DateTime    @default(now())
+  dateUpdated  DateTime    @updatedAt
+  Visits       Visits[]
+  NextOfKin    NextOfKin?
+  Surgeries    Surgeries[]
+}
+
+model NextOfKin {
+  id          String   @id @default(uuid())
+  firstName   String
+  lastName    String
+  address     String
+  phoneNumber String
+  sex         Sex
+  Student     Student  @relation(fields: [studentId], references: [matricNumber])
+  studentId   String   @unique
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+}
+
+model Surgeries {
+  id          String   @id @default(uuid())
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  status      String
+  Student     Student  @relation(fields: [studentId], references: [matricNumber])
+  studentId   String
+  Doctor      Doctor   @relation(fields: [doctorId], references: [id])
+  doctorId    String
+}
+
+model User {
+  id          String   @id @default(uuid())
+  dateCreated DateTime @default(now())
+  dateUpdated DateTime @updatedAt
+  email       String
+  userName    String
+  password    String
+}
+
+model Visits {
+  id          Int       @id @default(autoincrement())
+  dateCreated DateTime  @default(now())
+  dateUpdated DateTime  @updatedAt
+  Student     Student   @relation(fields: [studentId], references: [matricNumber])
+  studentId   String
+  Doctor      Doctor    @relation(fields: [doctorId], references: [id])
+  doctorId    String
+  dateOfVisit DateTime
+  notes       String
+  diagnosis   Diagnosis
+  severity    Severity
+}

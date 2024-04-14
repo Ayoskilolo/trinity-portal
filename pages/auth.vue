@@ -46,6 +46,7 @@
         color="blue"
         variant="soft"
         icon-right="login"
+        :loading="loading"
         @click="login()"
       />
       <div v-if="error" class="error w-1/2">
@@ -56,6 +57,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+  middleware: "guest",
+});
+
 const loginForm = ref({
   email: "",
   password: "",
@@ -63,18 +68,23 @@ const loginForm = ref({
 const [error] = useAutoAnimate();
 const hidden = ref(true);
 
-const router = useRouter();
+const loading = ref(false);
+
+const { signIn } = useAuth();
 
 async function login() {
-  error.value = false;
-  const details = {
-    email: loginForm.email,
-    password: loginForm.password,
-  };
-  const response = await $fetch("/api/auth", { method: "POST", data: details });
+  try {
+    loading.value = true;
+    const response = await signIn("credentials", loginForm.value);
+    console.log(response);
+  } catch (error) {
+  } finally {
+    loading.value = false;
+    error.value = false;
+  }
 
   if (response.isAuthenticated) {
-    router.push("/student");
+    useRouter().push("/student");
   } else {
     error.value = true;
   }

@@ -8,7 +8,7 @@ export const nextOfKinSchema = defineMongooseModel({
     firstName: String,
     lastName: String,
     address: String,
-    phoneNumber: Date,
+    phoneNumber: String,
     sex: String,
     student: {
       type: Types.ObjectId,

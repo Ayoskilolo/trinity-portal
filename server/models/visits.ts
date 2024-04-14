@@ -1,6 +1,15 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
 import { Types } from "mongoose";
 
+export interface Visit extends Document {
+  studentId: string;
+  doctorId: string;
+  dateOfVisit: Date;
+  notes?: string;
+  diagnosis?: string;
+  severity: string;
+}
+
 export const visitsSchema = defineMongooseModel({
   name: "visits",
   schema: {

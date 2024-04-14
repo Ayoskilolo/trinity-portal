@@ -1,7 +1,7 @@
 import { defineMongooseModel } from "#nuxt/mongoose";
 import { Types } from "mongoose";
 
-export const visitsSchema = defineMongooseModel({
+export const surgeriesSchema = defineMongooseModel({
   name: "surgeries",
   schema: {
     _id: "UUID",

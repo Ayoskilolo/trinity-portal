@@ -61,6 +61,7 @@
 <script setup>
 definePageMeta({
   layout: "home",
+  middleware: "auth",
 });
 
 const people = [

@@ -8,6 +8,8 @@ export default defineNuxtConfig({
     "@nuxtjs/tailwindcss",
     "nuxt-mongoose",
     "nuxt-quasar-ui",
+    "@sidebase/nuxt-auth",
+    "nuxt-server-utils",
     "@formkit/auto-animate/nuxt",
   ],
   googleFonts: {
@@ -16,10 +18,16 @@ export default defineNuxtConfig({
     },
     // overwriting: true,
   },
-  nitro: {
-    plugins: ["~/server/index.ts"],
-  },
   runtimeConfig: {
+    authSecret: process.env.AUTH_SECRET,
+  },
+  nuxtServerUtils: {
     mongodbUri: process.env.MONGODB_URI,
+  },
+  auth: {
+    baseURL: process.env.AUTH_ORIGIN,
+    provider: {
+      type: "authjs",
+    },
   },
 });

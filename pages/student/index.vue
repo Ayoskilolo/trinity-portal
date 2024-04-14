@@ -71,6 +71,7 @@ const pagination = ref({
   page: 1,
   rowsPerPage: getItemsPerPage(),
 });
+const students = ref();
 
 const isScreenSizeSmall = computed(() => {
   return $q.screen.lt.sm ? true : false;
@@ -102,7 +103,9 @@ definePageMeta({
 });
 const studentSearchModal = ref(false);
 
-onMounted(() => {
+onMounted(async () => {
+  students.value = await $fetch("api/students");
+  console.log(students.value);
   // studentSearchModal.value = true;
   loading.value = false;
 });
