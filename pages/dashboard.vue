@@ -60,7 +60,6 @@
 
 <script setup>
 definePageMeta({
-  layout: "home",
   middleware: "auth",
 });
 

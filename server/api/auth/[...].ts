@@ -40,9 +40,9 @@ export default NuxtAuthHandler({
             });
           }
 
-          delete user.password;
+          const { password, ...userDetails } = user;
 
-          return user;
+          return userDetails;
         } catch (error) {
           console.log(error);
           return false;

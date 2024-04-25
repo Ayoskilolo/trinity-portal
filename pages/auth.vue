@@ -5,7 +5,10 @@
     <div class="flex h-full w-1/2 items-center justify-center">
       <img src="/Trinity icon.png" />
     </div>
-    <div class="flex flex-col h-full w-1/2 justify-center items-center">
+    <QForm
+      class="flex flex-col h-full w-1/2 justify-center items-center"
+      @submit="login()"
+    >
       <p class="text-2xl text-blue-500">Sign In</p>
 
       <QInput
@@ -42,22 +45,23 @@
         rounded
         dense
         label="Login"
-        class="p-3 w-1/2 flex items-center justify-center"
+        class="p-2 w-1/2 flex items-center justify-center"
         color="blue"
         variant="soft"
         icon-right="login"
         :loading="loading"
-        @click="login()"
+        type="submit"
       />
       <div v-if="error" class="error w-1/2">
         <p>Incorrect Email or Password</p>
       </div>
-    </div>
+    </QForm>
   </section>
 </template>
 
 <script setup>
 definePageMeta({
+  layout: "auth",
   middleware: "guest",
 });
 
@@ -65,6 +69,7 @@ const loginForm = ref({
   email: "",
   password: "",
 });
+
 const [error] = useAutoAnimate();
 const hidden = ref(true);
 
@@ -75,18 +80,13 @@ const { signIn } = useAuth();
 async function login() {
   try {
     loading.value = true;
-    const response = await signIn("credentials", loginForm.value);
-    console.log(response);
+    await signIn("credentials", loginForm.value);
+    useRouter().push("/student");
   } catch (error) {
+    console.log(error);
   } finally {
     loading.value = false;
     error.value = false;
-  }
-
-  if (response.isAuthenticated) {
-    useRouter().push("/student");
-  } else {
-    error.value = true;
   }
 }
 </script>

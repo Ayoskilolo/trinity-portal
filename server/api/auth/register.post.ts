@@ -3,6 +3,7 @@ import { prisma } from "../../../prisma/db";
 
 export default defineEventHandler(async (event) => {
   const body = await readBody(event);
+
   if (!body.email || !body.userName || !body.password) {
     throw createError({
       statusCode: 400,

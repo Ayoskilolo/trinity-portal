@@ -1,13 +1,13 @@
 {
   "name": "nuxt-app",
   "private": true,
-  "type": "module",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "seed": "npx tsx prisma/seed.ts"
   },
   "dependencies": {
     "@formkit/auto-animate": "^0.8.1",
@@ -21,6 +21,7 @@
     "next-auth": "4.22.5",
     "nuxt": "^3.10.2",
     "nuxt-mongoose": "^1.0.5",
+    "nuxt-server-utils": "^0.0.7",
     "quasar": "^2.15.2",
     "vue": "^3.4.19",
     "vue-router": "^4.2.5"
@@ -33,9 +34,10 @@
     "nuxt-quasar-ui": "^2.0.8",
     "prisma": "^5.12.1",
     "ts-node": "^10.9.2",
+    "tsx": "^4.7.2",
     "typescript": "^5.4.5"
   },
   "prisma": {
-    "seed": "ts-node-esm prisma/seed.ts"
+    "seed": "tsx prisma/seed.ts"
   }
 }

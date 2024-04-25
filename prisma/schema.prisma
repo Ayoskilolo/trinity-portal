@@ -71,6 +71,7 @@ model Student {
   level        Level
   college      College
   sex          Sex
+  // hall         String
   religion     String
   password     String
   dateCreated  DateTime    @default(now())
