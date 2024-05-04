@@ -1,6 +1,11 @@
 <script lang="ts" setup>
 import type { _opacity } from "#tailwind-config/theme";
 
+definePageMeta({
+  layout: "auth",
+  middleware: "guest",
+});
+
 const isLoading = ref(false);
 const form = ref({ email: "", userName: "", password: "" });
 
