@@ -10,7 +10,6 @@ async function runSeeders() {
   await prisma.doctor.createMany({
     data: [
       {
-        id: "1",
         dateCreated: new Date(),
         firstName: "Semilore",
         lastName: "Sanya",
@@ -18,12 +17,18 @@ async function runSeeders() {
         email: "semilore@email.com",
       },
       {
-        id: "2",
         dateCreated: new Date(),
         firstName: "Afolabi",
         lastName: "Lesi",
         status: "ON_SEAT",
         email: "afolabi@email.com",
+      },
+      {
+        dateCreated: new Date(),
+        firstName: "Mayokun",
+        lastName: "Timothy",
+        status: "OFF_SEAT",
+        email: "mayokun@email.com",
       },
     ],
   });
@@ -168,7 +173,6 @@ async function runSeeders() {
   await prisma.nextOfKin.createMany({
     data: [
       {
-        id: "1",
         firstName: "Father",
         lastName: "Hector",
         address: "22 Victoria Islan",
@@ -177,7 +181,6 @@ async function runSeeders() {
         studentId: "18CG024711",
       },
       {
-        id: "2",
         firstName: "Kemi",
         lastName: "Afolabi",
         address: "22 Kolawole Shonibare Street",
@@ -186,7 +189,6 @@ async function runSeeders() {
         studentId: "18CG024712",
       },
       {
-        id: "3",
         firstName: "Mother",
         lastName: "Sowole",
         address: "22 Mende Street",
@@ -195,7 +197,6 @@ async function runSeeders() {
         studentId: "18CG024713",
       },
       {
-        id: "4",
         firstName: "Mother",
         lastName: "Daramola",
         address: "22 Ikeja Street",
@@ -207,55 +208,58 @@ async function runSeeders() {
   });
 
   //Creating Visits
-  await prisma.visits.createMany({
-    data: [
-      {
-        id: 1,
-        studentId: "18CG024711",
-        doctorId: "1",
-        dateOfVisit: new Date(),
-        notes: "",
-        diagnosis: "COLD",
-        severity: "LOW",
-      },
-      {
-        id: 2,
-        studentId: "18CG024711",
-        doctorId: "1",
-        dateOfVisit: new Date(),
-        notes: "",
-        diagnosis: "COLD",
-        severity: "MEDIUM",
-      },
-      {
-        id: 3,
-        studentId: "18CG024711",
-        doctorId: "2",
-        dateOfVisit: new Date(),
-        notes: "",
-        diagnosis: "COLD",
-        severity: "HIGH",
-      },
-      {
-        id: 4,
-        studentId: "18CG024713",
-        doctorId: "1",
-        dateOfVisit: new Date(),
-        notes: "",
-        diagnosis: "SPRAIN",
-        severity: "HIGH",
-      },
-      {
-        id: 5,
-        studentId: "18CG024714",
-        doctorId: "2",
-        dateOfVisit: new Date(),
-        notes: "",
-        diagnosis: "MALARIA",
-        severity: "MEDIUM",
-      },
-    ],
-  });
+  // await prisma.visits.createMany({
+  //   data: [
+  //     {
+  //       studentId: "18CG024711",
+  //       doctorId: "1",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "COLD",
+  //       severity: "LOW",
+  //     },
+  //     {
+  //       studentId: "18CG024711",
+  //       doctorId: "1",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "COLD",
+  //       severity: "MEDIUM",
+  //     },
+  //     {
+  //       studentId: "18CG024711",
+  //       doctorId: "2",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "COLD",
+  //       severity: "HIGH",
+  //     },
+  //     {
+  //       studentId: "18CG024711",
+  //       doctorId: "2",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "COLD",
+  //       severity: "HIGH",
+  //     },
+  //     {
+  //       studentId: "18CG024713",
+  //       doctorId: "1",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "SPRAIN",
+  //       severity: "HIGH",
+  //     },
+  //     {
+  //       studentId: "18CG024714",
+  //       doctorId: "2",
+  //       dateOfVisit: new Date(),
+  //       notes: "",
+  //       diagnosis: "MALARIA",
+  //       severity: "MEDIUM",
+  //     },
+  //   ],
+  // });
 
   console.log("Finished Seeding");
 }
