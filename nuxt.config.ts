@@ -27,4 +27,7 @@ export default defineNuxtConfig({
       type: "authjs",
     },
   },
+  quasar: {
+    plugins: ["Dialog", "Loading", "Notify"],
+  },
 });

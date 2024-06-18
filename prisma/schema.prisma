@@ -129,7 +129,7 @@ model User {
 }
 
 model Visits {
-  id               Int         @id @default(autoincrement())
+  id               String      @id @default(uuid())
   dateCreated      DateTime    @default(now())
   dateUpdated      DateTime    @updatedAt
   Student          Student     @relation(fields: [studentId], references: [matricNumber])
@@ -137,9 +137,10 @@ model Visits {
   Doctor           Doctor      @relation(fields: [doctorId], references: [id])
   doctorId         String
   dateOfVisit      DateTime
-  dateOfCompletion DateTime
+  dateOfCompletion DateTime    @default(now())
   notes            String
-  status           VisitStatus
-  diagnosis        Diagnosis
-  severity         Severity
+  doctorsNotes     String      @default("null")
+  status           VisitStatus @default(NO_VITALS)
+  diagnosis        Diagnosis   @default(NULL)
+  severity         Severity    @default(LOW)
 }

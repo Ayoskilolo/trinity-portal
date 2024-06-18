@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Visits" ALTER COLUMN "diagnosis" SET DEFAULT 'NULL',
+ALTER COLUMN "severity" SET DEFAULT 'LOW',
+ALTER COLUMN "doctorsNotes" SET DEFAULT 'null',
+ALTER COLUMN "status" SET DEFAULT 'NO_VITALS';

@@ -2,8 +2,8 @@
 import type { _opacity } from "#tailwind-config/theme";
 
 definePageMeta({
-  layout: "auth",
   middleware: "guest",
+  layout: "auth",
 });
 
 const isLoading = ref(false);

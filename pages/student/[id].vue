@@ -185,7 +185,7 @@
   </section>
 
   <q-dialog v-model="newVisitModal">
-    <NewVisitModal />
+    <NewVisitModal @close-modal="togglenewVisit()" />
   </q-dialog>
 </template>
 

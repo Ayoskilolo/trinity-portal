@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Visits" ALTER COLUMN "dateOfCompletion" SET DEFAULT CURRENT_TIMESTAMP;
