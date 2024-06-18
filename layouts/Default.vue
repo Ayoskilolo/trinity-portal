@@ -100,14 +100,27 @@ const navigationSections = [
     {
       label: "Students",
       to: "/student",
-      avatar: {
-        src: "https://avatars.githubusercontent.com/u/739984?v=4",
-      },
+      icon: "i-heroicons-user-circle",
     },
     {
       label: "Visits",
       to: "/visit",
-      icon: "i-heroicons-home",
+      icon: "i-heroicons-home-modern-solid",
+    },
+    {
+      label: "Consultations",
+      to: "/visit",
+      icon: "i-heroicons-user-group",
+    },
+    {
+      label: "Prescriptions",
+      to: "/prescription",
+      icon: "i-heroicons-shopping-cart",
+    },
+    {
+      label: "Inventory",
+      to: "/inventory",
+      icon: "i-heroicons-inbox-stack",
     },
   ],
 ];

@@ -53,6 +53,15 @@
             class="bg-cyan-100 text-black q-mt-sm"
             style="width: 100%"
           />
+          <q-btn
+            flat
+            no-caps
+            outline
+            label="Book Visit"
+            class="bg-cyan-100 text-black q-mt-sm"
+            style="width: 100%"
+            @click="togglenewVisit()"
+          />
         </q-card-section>
 
         <!-- <q-card-section v-if="activeLoan">
@@ -174,6 +183,10 @@
       </q-tab-panel>
     </q-tab-panels>
   </section>
+
+  <q-dialog v-model="newVisitModal">
+    <NewVisitModal />
+  </q-dialog>
 </template>
 
 <script setup>
@@ -187,6 +200,8 @@ const currentStudentVisits = ref([]);
 const currentStudentNextOfKinDetails = ref({});
 
 const tab = ref("visits");
+
+const newVisitModal = ref(false);
 
 async function getAStudent(matricNumber) {
   loading.value = true;
@@ -216,6 +231,10 @@ onMounted(async () => {
   currentStudentNextOfKinDetails.value = currentStudent.value.NextOfKin;
   loading.value = false;
 });
+
+function togglenewVisit() {
+  newVisitModal.value = !newVisitModal.value;
+}
 
 const isScreenSizeSmall = computed(() => {
   return $q.screen.lt.sm ? true : false;

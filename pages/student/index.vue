@@ -12,7 +12,7 @@
       v-model:pagination="pagination"
     >
       <template v-slot:loading>
-        <q-inner-loading showing color="amber" />
+        <q-inner-loading showing color="blue" />
       </template>
       <template v-slot:top>
         <section class="flex-col w-full">

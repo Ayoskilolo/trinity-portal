@@ -18,7 +18,16 @@ enum Sex {
   FEMALE
 }
 
+enum Hall {
+  Deborah
+  Esther
+  Mary
+  Joseph
+  Daniel
+}
+
 enum Level {
+  ALEVEL
   FRESHMAN
   SOPHMORE
   JUNIOR
@@ -26,10 +35,9 @@ enum Level {
 }
 
 enum College {
+  FBMAS
+  FMASS
   COE
-  CST
-  CMSS
-  CDSS
 }
 
 enum Diagnosis {
@@ -48,6 +56,12 @@ enum Severity {
 enum Status {
   ON_SEAT
   OFF_SEAT
+}
+
+enum VisitStatus {
+  ONGOING
+  NO_VITALS
+  COMPLETED
 }
 
 model Doctor {
@@ -71,7 +85,7 @@ model Student {
   level        Level
   college      College
   sex          Sex
-  // hall         String
+  hall         Hall
   religion     String
   password     String
   dateCreated  DateTime    @default(now())
@@ -115,15 +129,17 @@ model User {
 }
 
 model Visits {
-  id          Int       @id @default(autoincrement())
-  dateCreated DateTime  @default(now())
-  dateUpdated DateTime  @updatedAt
-  Student     Student   @relation(fields: [studentId], references: [matricNumber])
-  studentId   String
-  Doctor      Doctor    @relation(fields: [doctorId], references: [id])
-  doctorId    String
-  dateOfVisit DateTime
-  notes       String
-  diagnosis   Diagnosis
-  severity    Severity
+  id               Int         @id @default(autoincrement())
+  dateCreated      DateTime    @default(now())
+  dateUpdated      DateTime    @updatedAt
+  Student          Student     @relation(fields: [studentId], references: [matricNumber])
+  studentId        String
+  Doctor           Doctor      @relation(fields: [doctorId], references: [id])
+  doctorId         String
+  dateOfVisit      DateTime
+  dateOfCompletion DateTime
+  notes            String
+  status           VisitStatus
+  diagnosis        Diagnosis
+  severity         Severity
 }

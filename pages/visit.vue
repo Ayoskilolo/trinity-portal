@@ -1,5 +1,5 @@
 <template>
-  <q-page class="q-pa-md">
+  <section class="q-pa-md">
     <section class="row justify-around items-center q-pb-lg">
       <q-card
         flat
@@ -8,7 +8,7 @@
       >
         <q-card-section class="items-center">
           <p class="text-body2 ellipsis-2-lines">NO OF VISITS TODAY</p>
-          <p class="text-h3">{{ overDueRepayments.length }}</p>
+          <p class="text-h3">0</p>
         </q-card-section>
       </q-card>
       <q-card
@@ -18,7 +18,7 @@
       >
         <q-card-section>
           <p class="text-body2">NO OF ACTIVE DOCTORS</p>
-          <p class="text-h3">{{ allActiveLoans.length }}</p>
+          <p class="text-h3">1</p>
         </q-card-section>
       </q-card>
     </section>
@@ -27,7 +27,7 @@
         flat
         :bordered="isScreenSizeSmall"
         table-header-style="background-color: #f8f3e9"
-        title="Overdue Payments"
+        title="Visit History"
         :rows="overDueRepayments"
         :columns="collectionColumns"
         :filter="overdueFilter"
@@ -38,8 +38,8 @@
         v-model:pagination="pagination"
         :rows-per-page-options="[rowsPerPageOptions]"
         style="max-height: 30vh"
-        no-data-label="There are no overdue loans as of today!"
-        no-results-label="Couldn't find that client repayment. Check the spelling?"
+        no-data-label="There are no visits as of today!"
+        no-results-label="Couldn't find that student/visit. Check the student/doctor name?"
       >
         <template v-slot:loading>
           <q-inner-loading showing color="amber" />
@@ -75,7 +75,7 @@
         </template>
       </q-table>
     </section>
-  </q-page>
+  </section>
 </template>
 
 <script setup>
@@ -100,17 +100,11 @@ function getItemsPerPage() {
 }
 
 definePageMeta({
-  layout: "home",
   middleware: "auth",
 });
 
 const overdueFilter = ref();
 const expectedFilter = ref();
-
-const loanStore = useLoanStore();
-const collectionStore = useCollectionStore();
-const allActiveLoans = computed(() => loanStore.allLoans);
-const allRepayments = computed(() => collectionStore.allRepayments);
 
 const overDueRepayments = ref([]);
 const expectedRepayments = ref([]);
@@ -119,14 +113,14 @@ const collectionColumns = [
   {
     name: "clientName",
     required: true,
-    label: "Client Name",
+    label: "Student Name",
     align: "left",
     field: "Client",
     format: (val) => `${val.firstName} ${val.lastName}`,
   },
   {
     name: "amount",
-    label: "Amount",
+    label: "Doctor",
     field: "amount",
     align: "left",
   },
@@ -148,7 +142,7 @@ const collectionColumns = [
   },
   {
     name: "dateCreated",
-    label: "Date Created",
+    label: "Date of Visit",
     field: "dateCreated",
     align: "left",
     format: (val) => `${format(new Date(adjustDateString(val)), "do MMM yyy")}`,
@@ -162,11 +156,6 @@ const pagination = ref({
 });
 
 onMounted(async () => {
-  await collectionStore.getAllCollections("overdue");
-  overDueRepayments.value = allRepayments.value;
-  await collectionStore.getAllCollections("today");
-  expectedRepayments.value = allRepayments.value;
-  await loanStore.getAllActiveLoans();
   loading.value = false;
 });
 </script>

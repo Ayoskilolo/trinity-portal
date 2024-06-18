@@ -21,9 +21,6 @@ export default defineNuxtConfig({
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET,
   },
-  nuxtServerUtils: {
-    mongodbUri: process.env.MONGODB_URI,
-  },
   auth: {
     baseURL: process.env.AUTH_ORIGIN,
     provider: {

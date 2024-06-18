@@ -42,6 +42,7 @@ async function runSeeders() {
         sex: "FEMALE",
         religion: "Christian",
         password: "",
+        hall: "Deborah",
         // Visits: {
         //   create: [
         //     {
@@ -63,9 +64,10 @@ async function runSeeders() {
         nationality: "Nigerian",
         dateOfBirth: new Date("07-08-2001"),
         level: "SOPHMORE",
-        college: "CST",
+        college: "COE",
         sex: "MALE",
         religion: "Christian",
+        hall: "Daniel",
         password: "",
         // Visits: {
         //   create: [
@@ -88,8 +90,9 @@ async function runSeeders() {
         nationality: "Nigerian",
         dateOfBirth: new Date("07-07-2001"),
         level: "JUNIOR",
-        college: "CMSS",
+        college: "FMASS",
         sex: "MALE",
+        hall: "Joseph",
         religion: "Christian",
         password: "",
         // Visits: {
@@ -113,9 +116,36 @@ async function runSeeders() {
         nationality: "Nigerian",
         dateOfBirth: new Date("07-08-2001"),
         level: "SENIOR",
-        college: "CDSS",
+        college: "FBMAS",
         sex: "FEMALE",
         religion: "Christian",
+        hall: "Esther",
+        password: "",
+        // Visits: {
+        //   create: [
+        //     {
+        //       id: "2",
+        //       doctorId: "String",
+        //       dateOfVisit: new Date(),
+        //       notes: " This one na cold",
+        //       diagnosis: "COLD",
+        //       severity: "MEDIUM",
+        //     },
+        //   ],
+        // },
+        // Surgeries: [],
+      },
+      {
+        matricNumber: "18CG024715",
+        firstName: "Hameed",
+        lastName: "Soyemi",
+        nationality: "Nigerian",
+        dateOfBirth: new Date("07-08-2001"),
+        level: "ALEVEL",
+        college: "COE",
+        sex: "MALE",
+        religion: "Christian",
+        hall: "Daniel",
         password: "",
         // Visits: {
         //   create: [
