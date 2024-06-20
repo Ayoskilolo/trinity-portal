@@ -14,7 +14,7 @@
     </svg>
     <br />
 
-    <div class="text-center">
+    <div class="text-center pb-2">
       <p>Your visit has been booked!</p>
     </div>
     <q-btn
@@ -43,8 +43,9 @@ function closeModal() {
 <style scoped>
 .success-card {
   background-color: white;
+  color: black;
   border-radius: 12px;
-  padding: 5%;
+  padding: 2%;
   border: 1px solid grey;
   display: flex;
   flex-direction: column;
@@ -75,9 +76,9 @@ function closeModal() {
   border-radius: 50%;
   display: block;
   stroke-width: 2;
-  stroke: #f0b944;
+  stroke: lightblue;
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px #f0b944;
+  box-shadow: inset 0px 0px 0px lightblue;
   animation: fill 0.4s ease-in-out 0.4s forwards,
     scale 0.3s ease-in-out 0.9s both;
   position: relative;
@@ -90,7 +91,7 @@ function closeModal() {
   stroke-dashoffset: 166;
   stroke-width: 0.2;
   stroke-miterlimit: 10;
-  stroke: #f0b944;
+  stroke: light-blue;
   fill: #fff;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
 }
@@ -121,7 +122,7 @@ function closeModal() {
 
 @keyframes fill {
   100% {
-    box-shadow: inset 0px 0px 0px 30px #f0b944;
+    box-shadow: inset 0px 0px 0px 30px lightblue;
   }
 }
 </style>

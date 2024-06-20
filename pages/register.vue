@@ -7,12 +7,33 @@ definePageMeta({
 });
 
 const isLoading = ref(false);
-const form = ref({ email: "", userName: "", password: "" });
+const form = ref({
+  email: "",
+  matricNumber: "",
+  nationality: "",
+  dateOfBirth: ",",
+  level: "",
+  college: "",
+  sex: "",
+  hall: "",
+  religion: "",
+  firstName: "",
+  lastName: "",
+  userName: "",
+  password: "",
+  role: "",
+});
+
+const roles = ["doctor", "student", "nurse"];
+const level = ["ALEVEL", "FRESHMAN", "SOPHMORE", "JUNIOR", "SENIOR"];
+const college = ["FBMAS", "FMASS", "COE"];
+const sex = ["MALE", "FEMALE"];
+const hall = ["Deborah", "Esther", "Mary", "Joseph", "Daniel"];
 
 async function registerUser() {
   try {
     isLoading.value = true;
-    await $fetch("api/auth/register", {
+    const response = await $fetch("api/auth/register", {
       method: "POST",
       body: form.value,
     });
@@ -27,28 +48,144 @@ async function registerUser() {
 </script>
 <template>
   <div class="p-5 place-items-center">
-    <h1 class="mb-4 text-xl font-bold">Register</h1>
+    <h1 class="mb-4 text-xl font-bold">Register for the Trinity Portal</h1>
     <form @submit.prevent="registerUser">
-      <input
-        v-model="form.email"
-        class="w-full border p-2 rounded-lg mb-4"
-        type="email"
-        name="email"
-        placeholder="Email"
+      <USelect
+        v-model="form.role"
+        :options="roles"
+        variant="none"
+        placeholder="Role"
+        class="w-full border p-2 rounded-lg mb-4 bg-black text-white"
       />
+
+      <!-- username -->
       <input
         v-model="form.userName"
         class="w-full border p-2 rounded-lg mb-4"
         type="text"
         name="username"
+        v-if="form.role === 'nurse'"
         placeholder="Username"
       />
+
+      <!-- password -->
       <input
         v-model="form.password"
         class="w-full border p-2 rounded-lg mb-4"
         type="password"
         placeholder="Password"
       />
+
+      <!-- email -->
+      <input
+        v-model="form.email"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="email"
+        name="email"
+        placeholder="Email"
+        v-if="form.role != 'student'"
+      />
+
+      <!-- firstname -->
+      <input
+        v-model="form.firstName"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="text"
+        name="firstName"
+        placeholder="First Name"
+        v-if="form.role === 'doctor' || form.role === 'student'"
+      />
+
+      <!-- lastname -->
+      <input
+        v-model="form.lastName"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="text"
+        name="lastName"
+        placeholder="Last Name"
+        v-if="form.role === 'doctor' || form.role === 'student'"
+      />
+
+      <!-- matric number -->
+      <input
+        v-model="form.matricNumber"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="text"
+        name="matricNumber"
+        v-if="form.role === 'student'"
+        placeholder="matric number"
+      />
+
+      <!-- nationality -->
+      <input
+        v-model="form.nationality"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="text"
+        name="nationality"
+        v-if="form.role === 'student'"
+        placeholder="nationality"
+      />
+
+      <!-- date of birth -->
+      <input
+        v-model="form.dateOfBirth"
+        type="date"
+        name="dateOfBirth"
+        class="w-full border p-2 rounded-lg mb-4"
+        v-if="form.role === 'student'"
+        placeholder="date of birth"
+      />
+
+      <!-- level -->
+      <USelect
+        v-model="form.level"
+        :options="level"
+        variant="none"
+        class="w-full border p-2 rounded-lg mb-4 bg-black text-white"
+        v-if="form.role === 'student'"
+        placeholder="level"
+      />
+
+      <!-- college -->
+      <USelect
+        v-model="form.college"
+        :options="college"
+        variant="none"
+        class="w-full border p-2 rounded-lg mb-4 bg-black text-white"
+        v-if="form.role === 'student'"
+        placeholder="college"
+      />
+
+      <!-- sex -->
+      <USelect
+        v-model="form.sex"
+        :options="sex"
+        variant="none"
+        class="w-full border p-2 rounded-lg mb-4 bg-black text-white"
+        v-if="form.role === 'student'"
+        placeholder="sex"
+      />
+
+      <!-- hall -->
+      <USelect
+        v-model="form.hall"
+        :options="hall"
+        variant="none"
+        class="w-full border p-2 rounded-lg mb-4 bg-black text-white"
+        v-if="form.role === 'student'"
+        placeholder="hall"
+      />
+
+      <!-- religion -->
+      <input
+        v-model="form.religion"
+        class="w-full border p-2 rounded-lg mb-4"
+        type="text"
+        name="username"
+        v-if="form.role === 'student'"
+        placeholder="religion"
+      />
+
       <button
         :disabled="isLoading"
         type="submit"

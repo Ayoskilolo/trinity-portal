@@ -1,19 +1,25 @@
+import { prisma } from "../../../prisma/db";
+
 export default eventHandler(async (event) => {
   const query = getQuery(event);
 
   let visits;
-  if (query.dateFilter) {
+  if (query.studentId) {
     const formattedDate = new Date(String(query.dateFilter));
-    visits = await visitsSchema.find({
-      dateOfVisit: formattedDate,
-    });
-  } else {
-    visits = await visitsSchema.find({
-      dateOfVisit: new Date(),
+    visits = await prisma.visits.findMany({
+      where: {
+        studentId: String(query.studentId),
+      },
     });
   }
 
-  const formattedVisits = visits.forEach((visit) => {
-    return visit.toObject;
-  });
+  if (query.doctorId) {
+    visits = await prisma.visits.findMany({
+      where: {
+        doctorId: String(query.doctorId),
+      },
+    });
+  }
+
+  return visits;
 });

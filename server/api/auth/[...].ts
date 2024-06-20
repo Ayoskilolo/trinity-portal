@@ -11,15 +11,47 @@ export default NuxtAuthHandler({
     CredentialsProvider.default({
       name: "credentials",
       credentials: {},
-      async authorize(credentials: { email: string; password: string }) {
+      async authorize(credentials: {
+        role: string;
+        matricNumber?: string;
+        email: string;
+        password: string;
+      }) {
         try {
-          const users = await prisma.user.findMany({
-            where: {
-              userName: credentials.email,
-            },
-          });
+          let user;
+          switch (credentials.role) {
+            case "student":
+              user = await prisma.student.findUnique({
+                where: {
+                  matricNumber: String(credentials.matricNumber),
+                },
+              });
+              console.log(user);
+              break;
 
-          const user = users[0];
+            case "doctor":
+              user = await prisma.doctor.findFirst({
+                where: {
+                  email: String(credentials.email),
+                },
+              });
+              break;
+
+            case "nurse":
+              user = await prisma.nurse.findFirst({
+                where: {
+                  OR: [
+                    {
+                      userName: credentials.email,
+                    },
+                    {
+                      email: credentials.email,
+                    },
+                  ],
+                },
+              });
+              break;
+          }
 
           if (!user) {
             throw createError({
@@ -41,8 +73,9 @@ export default NuxtAuthHandler({
           }
 
           const { password, ...userDetails } = user;
+          const userInfo = { ...userDetails, role: credentials.role };
 
-          return userDetails;
+          return userInfo;
         } catch (error) {
           console.log(error);
           return false;

@@ -19,8 +19,8 @@
           style="display: flex; flex-direction: column; width: 100%"
           v-if="showUserDetails"
         >
-          <p>{{ data.user.email }}</p>
-          <p class="font-thin">Doctor</p>
+          <p>{{ data.user.firstName }} {{ data?.user.lastName }}</p>
+          <p class="font-thin">{{ data?.user.role }}</p>
         </div>
       </div>
       <UVerticalNavigation
@@ -109,7 +109,7 @@ const navigationSections = [
     },
     {
       label: "Consultations",
-      to: "/visit",
+      to: "/consultation",
       icon: "i-heroicons-user-group",
     },
     {

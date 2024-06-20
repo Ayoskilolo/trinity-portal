@@ -232,7 +232,9 @@ onMounted(async () => {
   loading.value = false;
 });
 
-function togglenewVisit() {
+async function togglenewVisit() {
+  currentStudent.value = await getAStudent(studentMatricNo);
+  currentStudentVisits.value = currentStudent.value.Visits;
   newVisitModal.value = !newVisitModal.value;
 }
 

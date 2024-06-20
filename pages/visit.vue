@@ -26,7 +26,7 @@
       <q-table
         flat
         :bordered="isScreenSizeSmall"
-        table-header-style="background-color: #f8f3e9"
+        table-header-style="background-color: lightblue"
         title="Visit History"
         :rows="overDueRepayments"
         :columns="collectionColumns"

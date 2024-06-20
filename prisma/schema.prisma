@@ -70,8 +70,9 @@ model Doctor {
   dateUpdated DateTime    @updatedAt
   firstName   String      @db.VarChar(255)
   lastName    String      @db.VarChar(255)
-  status      Status
+  status      Status      @default(ON_SEAT)
   email       String
+  password    String
   Visits      Visits[]
   Surgeries   Surgeries[]
 }
@@ -119,7 +120,7 @@ model Surgeries {
   doctorId    String
 }
 
-model User {
+model Nurse {
   id          String   @id @default(uuid())
   dateCreated DateTime @default(now())
   dateUpdated DateTime @updatedAt
