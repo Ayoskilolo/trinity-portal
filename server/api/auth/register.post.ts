@@ -30,6 +30,7 @@ export default defineEventHandler(async (event) => {
           ...studentData,
         },
       });
+      break;
     case "doctor":
       const { firstName, lastName } = body;
       newUser = await prisma.doctor.create({
@@ -40,10 +41,12 @@ export default defineEventHandler(async (event) => {
           password: hashedPassword,
         },
       });
+      break;
     case "nurse":
       newUser = await prisma.nurse.create({
         data: { email, userName, password: hashedPassword },
       });
+      break;
   }
 
   return { ...newUser, password: undefined };

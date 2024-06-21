@@ -26,7 +26,6 @@ export default NuxtAuthHandler({
                   matricNumber: String(credentials.matricNumber),
                 },
               });
-              console.log(user);
               break;
 
             case "doctor":

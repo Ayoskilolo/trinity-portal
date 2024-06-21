@@ -19,7 +19,8 @@
           style="display: flex; flex-direction: column; width: 100%"
           v-if="showUserDetails"
         >
-          <p>{{ data.user.firstName }} {{ data?.user.lastName }}</p>
+          <p v-if="user.role === 'nurse'">{{ data?.user.userName }}</p>
+          <p v-else>{{ data.user.firstName }} {{ data?.user.lastName }}</p>
           <p class="font-thin">{{ data?.user.role }}</p>
         </div>
       </div>
@@ -35,7 +36,9 @@
         <q-toolbar>
           <q-btn flat round dense icon="menu" @click="drawer = !drawer" />
           <q-toolbar-title> {{ pageHeading }} </q-toolbar-title>
-          <q-btn flat round dense icon="more_vert" />
+          <q-btn flat round dense icon="notifications">
+            <q-badge color="red" rounded floating>1</q-badge>
+          </q-btn>
         </q-toolbar>
 
         <slot />
@@ -80,7 +83,7 @@ const pageHeading = computed(() => {
   let headingString;
   if (match) {
     const heading = match[match.length - 1];
-    headingString = heading.charAt(0).toUpperCase() + heading.slice(1) + "s";
+    headingString = heading.charAt(0).toUpperCase() + heading.slice(1);
   }
 
   if (headingString === "Homes" || headingString === "Dashboards") {
@@ -90,44 +93,60 @@ const pageHeading = computed(() => {
   }
 });
 
-const navigationSections = [
-  [
-    // {
-    //   label: "Dashboard",
-    //   to: "/dashboard",
-    //   icon: "i-heroicons-command-line",
-    // },
-    {
-      label: "Students",
-      to: "/student",
-      icon: "i-heroicons-user-circle",
-    },
-    {
-      label: "Visits",
-      to: "/visit",
-      icon: "i-heroicons-home-modern-solid",
-    },
-    {
-      label: "Consultations",
-      to: "/consultation",
-      icon: "i-heroicons-user-group",
-    },
-    {
-      label: "Prescriptions",
-      to: "/prescription",
-      icon: "i-heroicons-shopping-cart",
-    },
-    {
-      label: "Inventory",
-      to: "/inventory",
-      icon: "i-heroicons-inbox-stack",
-    },
-  ],
-];
+const navigationSections = ref();
 
 const { data, signOut } = useAuth();
 
+const user = data.value.user;
+
 onMounted(async () => {
+  if (user) {
+    switch (user.role) {
+      case "student":
+        navigationSections.value = [
+          [
+            {
+              label: "Visits",
+              to: "/visit",
+              icon: "i-heroicons-home-modern-solid",
+            },
+            {
+              label: "Prescriptions",
+              to: "/prescription",
+              icon: "i-heroicons-shopping-cart",
+            },
+          ],
+        ];
+        break;
+      case "doctor":
+        navigationSections.value = [
+          [
+            {
+              label: "Consultations",
+              to: "/consultation",
+              icon: "i-heroicons-user-group",
+            },
+          ],
+        ];
+        break;
+      case "nurse":
+        navigationSections.value = [
+          [
+            {
+              label: "Students",
+              to: "/student",
+              icon: "i-heroicons-user-circle",
+            },
+            {
+              label: "Inventory",
+              to: "/inventory",
+              icon: "i-heroicons-inbox-stack",
+            },
+          ],
+        ];
+    }
+  }
+
   miniState.value = isScreenLowerThanMd.value;
 
   if (isScreenLowerThanSm.value) {

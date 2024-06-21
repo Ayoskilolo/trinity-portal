@@ -164,7 +164,6 @@ async function login() {
   try {
     loading.value = true;
     await signIn("credentials", loginForm.value);
-    useRouter().push("/student");
   } catch (error) {
     console.log(error);
   } finally {
