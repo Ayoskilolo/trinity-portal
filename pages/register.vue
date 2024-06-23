@@ -1,5 +1,7 @@
 <script lang="ts" setup>
 import type { _opacity } from "#tailwind-config/theme";
+import FailureModal from "~/components/FailureModal.vue";
+import SuccessModal from "~/components/SuccessModal.vue";
 
 definePageMeta({
   middleware: "guest",
@@ -30,19 +32,38 @@ const college = ["FBMAS", "FMASS", "COE"];
 const sex = ["MALE", "FEMALE"];
 const hall = ["Deborah", "Esther", "Mary", "Joseph", "Daniel"];
 
+const successModal = ref(false);
+const failureModal = ref(false);
+
 async function registerUser() {
   try {
+    Loading.show({
+      message: "Registering the new user",
+    });
     isLoading.value = true;
     const response = await $fetch("api/auth/register", {
       method: "POST",
       body: form.value,
     });
 
-    useRouter().push("/auth");
+    if (response) {
+      successModal.value = true;
+    }
   } catch (error) {
+    failureModal.value = true;
     console.log(error);
   } finally {
+    Loading.hide();
     isLoading.value = false;
+  }
+}
+
+function closeModal(type: string) {
+  switch (type) {
+    case "success":
+      useRouter().push("/auth");
+    case "failure":
+      failureModal.value = false;
   }
 }
 </script>
@@ -198,6 +219,18 @@ async function registerUser() {
       </button>
     </form>
   </div>
+  <q-dialog v-model="successModal">
+    <SuccessModal
+      @close-modal="closeModal('success')"
+      reason="You have successfully registered the user."
+    />
+  </q-dialog>
+  <q-dialog v-model="failureModal">
+    <FailureModal
+      @close-modal="closeModal('failure')"
+      reason="Something went wrong in registering the user"
+    />
+  </q-dialog>
 </template>
 
 <style></style>

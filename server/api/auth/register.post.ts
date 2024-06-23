@@ -42,6 +42,7 @@ export default defineEventHandler(async (event) => {
           firstName,
           lastName,
           password: hashedPassword,
+          status: "ON_SEAT",
         },
       });
       break;
