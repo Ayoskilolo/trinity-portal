@@ -36,7 +36,13 @@
         <q-toolbar>
           <q-btn flat round dense icon="menu" @click="drawer = !drawer" />
           <q-toolbar-title> {{ pageHeading }} </q-toolbar-title>
-          <q-btn flat round dense icon="notifications">
+          <q-btn
+            flat
+            round
+            dense
+            icon="notifications"
+            v-if="user.role === 'student'"
+          >
             <q-badge color="red" rounded floating>1</q-badge>
           </q-btn>
         </q-toolbar>

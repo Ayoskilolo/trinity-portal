@@ -36,17 +36,26 @@ export default defineEventHandler(async (event) => {
       break;
     case "doctor":
       const { firstName, lastName } = body;
-      newUser = await prisma.doctor.create({
-        data: {
-          email: userEmail,
-          firstName,
-          lastName,
-          password: hashedPassword,
-          status: "ON_SEAT",
-        },
-      });
+      try {
+        newUser = await prisma.doctor.create({
+          data: {
+            email: userEmail,
+            firstName,
+            lastName,
+            password: hashedPassword,
+            status: "ON_SEAT",
+          },
+        });
+      } catch (error) {
+        console.log(error);
+      }
+
       break;
     case "nurse":
+      console.log(userEmail);
+      console.log(name);
+      console.log(hashedPassword);
+      console.log("iran");
       newUser = await prisma.nurse.create({
         data: { email: userEmail, userName: name, password: hashedPassword },
       });

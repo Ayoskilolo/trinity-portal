@@ -13,8 +13,8 @@
       />
     </svg>
     <br />
-
-    <div class="text-center pb-2">
+    <p v-if="reason">{{ reason }}</p>
+    <div class="text-center pb-2" v-else>
       <p>Your visit has been booked!</p>
     </div>
     <q-btn
