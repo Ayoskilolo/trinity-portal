@@ -14,6 +14,9 @@ export default defineEventHandler(async (event) => {
 
   const { email, userName } = body;
 
+  const userEmail = email;
+  const name = userName;
+
   const salt = await bcrypt.genSalt(10);
 
   const hashedPassword = await bcrypt.hash(body.password, salt);
@@ -35,7 +38,7 @@ export default defineEventHandler(async (event) => {
       const { firstName, lastName } = body;
       newUser = await prisma.doctor.create({
         data: {
-          email,
+          email: userEmail,
           firstName,
           lastName,
           password: hashedPassword,
@@ -44,7 +47,7 @@ export default defineEventHandler(async (event) => {
       break;
     case "nurse":
       newUser = await prisma.nurse.create({
-        data: { email, userName, password: hashedPassword },
+        data: { email: userEmail, userName: name, password: hashedPassword },
       });
       break;
   }

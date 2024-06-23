@@ -37,6 +37,5 @@ export default eventHandler(async (event) => {
     });
   }
 
-  console.log(visits);
   return visits;
 });

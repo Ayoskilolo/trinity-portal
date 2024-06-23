@@ -264,7 +264,7 @@ async function createVisit() {
   try {
     visitInfo.value.dateOfVisit = new Date(visitInfo.value.datePicked);
 
-    response = await $fetch("/api/visits/visit", {
+    response = await $fetch("/api/visit/visit", {
       method: "POST",
       body: { ...visitInfo.value, studentId },
     });
