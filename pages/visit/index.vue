@@ -9,7 +9,7 @@
         >
           <q-card-section class="items-center">
             <p class="text-body2 ellipsis-2-lines">NO OF VISITS TODAY</p>
-            <p class="text-h3">0</p>
+            <p class="text-h3">{{ visits.length }}</p>
           </q-card-section>
         </q-card>
         <q-card

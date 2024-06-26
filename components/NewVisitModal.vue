@@ -111,14 +111,16 @@
           :header-nav="step > 3"
         >
           <q-form @submit="createVisit()">
-            <div class="row">
+            <!-- <div class="row">
               <q-card v-for="doctor in doctorsOnSeat">
                 {{ doctor.firstName }}
               </q-card>
-            </div>
+            </div> -->
             <q-select
               outlined
               hide-selected
+              style="color: black"
+              color="lightblue"
               v-model="visitInfo.doctorId"
               :options="doctorsOnSeat"
               :option-label="(obj: any) => `${obj.firstName} ${obj.lastName}`"
@@ -127,20 +129,17 @@
               map-options
               emit-value
               id="select"
-              input-style="color:black;"
             >
               <template v-slot:append>
                 <q-icon name="search" />
               </template>
               <template v-slot:option="scope">
-                <q-item v-bind="scope.itemProps">
-                  <q-item-section avatar>
-                    <q-icon :name="scope.opt.icon" />
-                  </q-item-section>
+                <q-item v-bind="scope.itemProps" style="color: black">
                   <q-item-section>
-                    <q-item-label class="text-black">{{
-                      scope.opt.label
-                    }}</q-item-label>
+                    <q-item-label
+                      >{{ scope.opt.firstName }}
+                      {{ scope.opt.lastName }}</q-item-label
+                    >
                   </q-item-section>
                 </q-item>
               </template>

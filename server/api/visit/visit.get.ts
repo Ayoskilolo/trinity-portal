@@ -30,11 +30,28 @@ export default eventHandler(async (event) => {
   }
 
   if (query.doctorId) {
-    visits = await prisma.visits.findMany({
-      where: {
-        doctorId: String(query.doctorId),
-      },
-    });
+    if (query.status) {
+      visits = await prisma.visits.findMany({
+        where: {
+          doctorId: String(query.doctorId),
+          status: String(query.status),
+        },
+        include: {
+          Doctor: true,
+          Student: true,
+        },
+      });
+    } else {
+      visits = await prisma.visits.findMany({
+        where: {
+          doctorId: String(query.doctorId),
+        },
+        include: {
+          Doctor: true,
+          Student: true,
+        },
+      });
+    }
   }
 
   return visits;

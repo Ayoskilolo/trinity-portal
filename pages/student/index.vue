@@ -98,13 +98,6 @@
       </template>
     </QTable>
   </section>
-
-  <UModal v-model="studentSearchModal" class="p-5">
-    <UInput />
-    <UButton />
-
-    <div class="p-4">Hello</div>
-  </UModal>
 </template>
 
 <script setup lang="ts">
@@ -171,8 +164,7 @@ async function getAllStudents(filter?: string) {
 }
 
 onMounted(async () => {
-  students.value = await $fetch("/api/student");
-  // studentSearchModal.value = true;
+  await getAllStudents();
   loading.value = false;
 });
 
@@ -200,6 +192,7 @@ const columns = [
     label: "Level",
     align: "left",
     field: "level",
+    format: (val: any) => formatLevel(val),
   },
   {
     name: "college",
@@ -208,4 +201,17 @@ const columns = [
     field: "college",
   },
 ];
+
+function formatLevel(level: string) {
+  switch (level) {
+    case "FRESHMAN":
+      return "100 Level";
+    case "SOPHMORE":
+      return "200 Level";
+    case "JUNIOR":
+      return "300 Level";
+    case "SENIOR":
+      return "400 Level";
+  }
+}
 </script>

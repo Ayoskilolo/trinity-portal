@@ -43,7 +43,34 @@
             icon="notifications"
             v-if="user.role === 'student'"
           >
-            <q-badge color="red" rounded floating>1</q-badge>
+            <q-menu>
+              <q-list style="width: 500px; color: black">
+                <q-item clickable v-close-popup>
+                  <q-item-section
+                    >Don't forget to take your medication!</q-item-section
+                  >
+                </q-item>
+                <q-separator />
+                <q-item clickable v-close-popup>
+                  <q-item-section
+                    >Don't forget to take your medication!</q-item-section
+                  >
+                </q-item>
+                <q-separator />
+                <q-item clickable v-close-popup>
+                  <q-item-section
+                    >Don't forget to take your medication!</q-item-section
+                  >
+                </q-item>
+                <q-separator />
+                <q-item clickable v-close-popup>
+                  <q-item-section
+                    >Don't forget to take your medication!</q-item-section
+                  >
+                </q-item>
+              </q-list>
+            </q-menu>
+            <q-badge color="red" rounded floating>4</q-badge>
           </q-btn>
         </q-toolbar>
 
