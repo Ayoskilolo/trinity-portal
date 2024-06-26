@@ -143,11 +143,11 @@ onMounted(async () => {
               to: "/visit",
               icon: "i-heroicons-home-modern-solid",
             },
-            {
-              label: "Prescriptions",
-              to: "/prescription",
-              icon: "i-heroicons-shopping-cart",
-            },
+            // {
+            //   label: "Prescriptions",
+            //   to: "/prescription",
+            //   icon: "i-heroicons-shopping-cart",
+            // },
             {
               label: "Feedback",
               to: "/feedback",
@@ -175,11 +175,11 @@ onMounted(async () => {
               to: "/student",
               icon: "i-heroicons-user-circle",
             },
-            {
-              label: "Inventory",
-              to: "/inventory",
-              icon: "i-heroicons-inbox-stack",
-            },
+            // {
+            //   label: "Inventory",
+            //   to: "/inventory",
+            //   icon: "i-heroicons-inbox-stack",
+            // },
           ],
         ];
     }
