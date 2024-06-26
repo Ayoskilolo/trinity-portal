@@ -148,6 +148,11 @@ onMounted(async () => {
               to: "/prescription",
               icon: "i-heroicons-shopping-cart",
             },
+            {
+              label: "Feedback",
+              to: "/feedback",
+              icon: "i-heroicons-shopping-cart",
+            },
           ],
         ];
         break;
